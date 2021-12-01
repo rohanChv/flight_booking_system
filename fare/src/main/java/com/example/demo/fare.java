@@ -21,6 +21,10 @@ public class fare {
 		this.date = date;
 	}
 
+	public fare() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getFid() {
 		return fid;
 	}

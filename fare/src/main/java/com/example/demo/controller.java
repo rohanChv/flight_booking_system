@@ -1,5 +1,7 @@
 package com.example.demo;
 
+
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ repo rp;
 
 @GetMapping("/getfare/{id}")
 public Optional<fare> getfare(@PathVariable String id) {
-		return rp.getinfo(id);
+	return rp.getinfo(id);
 }
 @PostMapping("/getfare/add")
 public String add(@RequestBody fare f1) {
