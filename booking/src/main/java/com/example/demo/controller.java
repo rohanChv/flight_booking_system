@@ -2,6 +2,8 @@ package com.example.demo;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,20 +27,25 @@ repo rp;
 			return "cannot book";
 		}	
 	}
-	@GetMapping("/cancel/{fid}/{name}")
-	public String cancel(@PathVariable String fid,@PathVariable String name) {
-		try {
-			book b1=rp.get(fid, name);
-			rp.deleteById(fid);
-			b1.setStatus("cancelled");
-			rp.insert(b1);
-			return "canceled";
-		}catch(Exception e) {
-			return "sorry unable to cancel";
-		}
+	
+@GetMapping("/cancel/{fid}/{name}")
+	public String cancel(@PathVariable String fid,@PathVariable String name){
+		try
+	  	{ 
+		book b1=rp.get(fid, name);
+	  	rp.delete(fid, name);
+	  	b1.setStatus("cancelled"); 
+	  	rp.insert(b1);
+	  	return "good"; 
+	  }catch(Exception e) { 
+		  return e.getMessage();
+		  }
 	}
-	@GetMapping("/mybookings/{name}")
-	public book getBooking(@PathVariable String name) {
-			return rp.getbooking(name).orElseThrow(()->new RuntimeException(String.format("no data found")));
-	}
+	 
+	 @GetMapping("/mybookings/{name}")
+	 public List<book>getdata(@PathVariable String name){
+		 return rp.get(name);
+	 }
+	
+	
 }
