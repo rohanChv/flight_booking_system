@@ -4,7 +4,23 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="flight_info")
 public class flight_info {
-String name,route,date;
+String name,route,date,fid;
+
+public String getFid() {
+	return fid;
+}
+
+public void setFid(String fid) {
+	this.fid = fid;
+}
+
+public flight_info(String name, String route, String date, String fid) {
+	super();
+	this.name = name;
+	this.route = route;
+	this.date = date;
+	this.fid = fid;
+}
 
 public String getName() {
 	return name;
@@ -20,13 +36,6 @@ public String getRoute() {
 
 public void setRoute(String route) {
 	this.route = route;
-}
-
-public flight_info(String name, String route,String date) {
-	super();
-	this.name = name;
-	this.route = route;
-	this.date=date;
 }
 
 public String getDate() {
