@@ -9,21 +9,7 @@ public class fare {
 	@Indexed(unique=true)
 	String fid;
 
-	String economy,premium_economy,business,fist_class,date;
-
-	public fare(String fid, String economy, String premium_economy, String business, String fist_class, String date) {
-		super();
-		this.fid = fid;
-		this.economy = economy;
-		this.premium_economy = premium_economy;
-		this.business = business;
-		this.fist_class = fist_class;
-		this.date = date;
-	}
-
-	public fare() {
-		// TODO Auto-generated constructor stub
-	}
+	String economy,premium_economy,business,fist_class,date,route;
 
 	public String getFid() {
 		return fid;
@@ -72,6 +58,31 @@ public class fare {
 	public void setDate(String date) {
 		this.date = date;
 	}
+
+	public String getRoute() {
+		return route;
+	}
+
+	public void setRoute(String route) {
+		this.route = route;
+	}
+
+	public fare(String fid, String economy, String premium_economy, String business, String fist_class, String date,
+			String route) {
+		super();
+		this.fid = fid;
+		this.economy = economy;
+		this.premium_economy = premium_economy;
+		this.business = business;
+		this.fist_class = fist_class;
+		this.date = date;
+		this.route = route;
+	}
+
+	public fare() {
+		// TODO Auto-generated constructor stub
+	}
+
 	
 	
 }

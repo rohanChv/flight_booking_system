@@ -1,7 +1,5 @@
 package com.example.demo;
 
-
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,28 +13,39 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/booking")
 public class controller {
+	String fid,fare,fclass,status,name;
 @Autowired
 repo rp;
-
-	@PostMapping("/book")
-	public String add(@RequestBody book b1) {
+@Autowired
+fserv fs1;
+	@GetMapping("/book/{name}")
+	public String add(@PathVariable String name) {
 		try {
-			rp.insert(b1);
-			return "sucess";
+			this.fid=fs1.getid();
+			this.fare=fs1.fare();
+			this.fclass=fs1.getclass();
+			status="booked";
+			this.name=name;
+			book b1=new book(fid,fare,fclass,status,name);
+			if(rp.getstat(fid,name)) {
+				rp.save(b1);
+				return "booked."+"name:"+name+"\nclass:"+b1.getFclass()+"\npayment:"+b1.getPayment_status();
+			}
+			return "flight is booked with same credentials.please enter valid details to avoid loss";
 		}catch(Exception e) {
 			return "cannot book";
 		}	
 	}
 	
 @GetMapping("/cancel/{fid}/{name}")
-	public String cancel(@PathVariable String fid,@PathVariable String name){
+	public String cancel(@PathVariable String id,@PathVariable String name){
 		try
 	  	{ 
 		book b1=rp.get(fid, name);
 	  	rp.delete(fid, name);
 	  	b1.setStatus("cancelled"); 
 	  	rp.insert(b1);
-	  	return "good"; 
+	  	return "booking canceled"; 
 	  }catch(Exception e) { 
 		  return e.getMessage();
 		  }
@@ -45,7 +54,5 @@ repo rp;
 	 @GetMapping("/mybookings/{name}")
 	 public List<book>getdata(@PathVariable String name){
 		 return rp.get(name);
-	 }
-	
-	
+	 }		
 }

@@ -9,5 +9,6 @@ import org.springframework.data.mongodb.repository.Query;
 public interface repo extends MongoRepository<fare,String>{
 	@Query("{'fid':?0}")
 	public Optional<fare>getinfo(String fid);
-
+	@Query("{'fid':?0}")
+	public fare getobj(String fid);
 }
