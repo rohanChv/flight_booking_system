@@ -27,18 +27,16 @@ fserv fs1;
 			status="booked";
 			this.name=name;
 			book b1=new book(fid,fare,fclass,status,name);
-			if(rp.getstat(fid,name)) {
 				rp.save(b1);
 				return "booked."+"name:"+name+"\nclass:"+b1.getFclass()+"\npayment:"+b1.getPayment_status();
-			}
-			return "flight is booked with same credentials.please enter valid details to avoid loss";
+			
 		}catch(Exception e) {
 			return "cannot book";
 		}	
 	}
 	
 @GetMapping("/cancel/{fid}/{name}")
-	public String cancel(@PathVariable String id,@PathVariable String name){
+	public String cancel(@PathVariable String fid,@PathVariable String name){
 		try
 	  	{ 
 		book b1=rp.get(fid, name);
