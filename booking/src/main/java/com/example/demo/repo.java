@@ -10,6 +10,7 @@ public interface repo extends MongoRepository<book,String>{
 	
 	@Query("{'fid':?0,'name':?1}")
 	public book get(String fid,String name);
+	
 @Query(value="{'fid' : ?0,'name':?1}", delete = true)
 public book delete(String fid,String name);
 }

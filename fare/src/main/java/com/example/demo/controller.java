@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class controller {
 @Autowired
 repo rp;
-
-@GetMapping("/getfare/{id}")
+serv s1=new serv();
+@GetMapping("/{id}")
 public Optional<fare> getfare(@PathVariable String id) {
 	return rp.getinfo(id);
 }
@@ -30,7 +30,28 @@ public String add(@RequestBody fare f1) {
 	}catch(Exception e) {
 		return "sorry problem in creation ";
 	}
-	
+}
+@GetMapping("/{id}/{type}/select")
+public String getfare(@PathVariable String id,@PathVariable String type) {
+	fare f1=rp.getobj(id);
+	return "your seat is selected.please confirm.\nformat:class,fare\n"+s1.getdata(f1, type)+","+s1.fr();
+}
+
+@GetMapping("/{id}/{type}/select/confirm")
+public String getcon() {
+	return "flight id:"+s1.fid();
+}
+@GetMapping("/id")
+public String getid() {
+	return s1.fid();
+}
+@GetMapping("/class")
+public String getclass() {
+	return s1.fcl();
+}
+@GetMapping("/fare")
+public String fare() {
+	return s1.fr();
 }
 }
 
