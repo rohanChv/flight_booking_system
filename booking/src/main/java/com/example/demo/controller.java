@@ -27,8 +27,11 @@ fserv fs1;
 			status="booked";
 			this.name=name;
 			book b1=new book(fid,fare,fclass,status,name);
-			rp.insert(b1);
-			return "booked"+"name:"+name+"\nclass:"+"payment:"+b1.getPayment_status();
+			if(rp.getstat(fid,name)) {
+				rp.save(b1);
+				return "booked."+"name:"+name+"\nclass:"+b1.getFclass()+"\npayment:"+b1.getPayment_status();
+			}
+			return "flight is booked with same credentials.please enter valid details to avoid loss";
 		}catch(Exception e) {
 			return "cannot book";
 		}	
@@ -51,5 +54,5 @@ fserv fs1;
 	 @GetMapping("/mybookings/{name}")
 	 public List<book>getdata(@PathVariable String name){
 		 return rp.get(name);
-	 }	
+	 }		
 }
