@@ -1,19 +1,15 @@
 package com.example.demo;
-
-
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection="book")
 public class book {
 	String fid,fare,fclass,status,name;
     String payment_status;
-	public book(String fid, String fare, String fclass, String status, String name) {
+	public book(String fid, String fare, String fclass, String status, String name,String payment_status) {
 		super();
 		this.fid = fid;
 		this.fare = fare;
 		this.fclass = fclass;
 		this.status = status;
 		this.name = name;
+		this.payment_status=payment_status;
 	}
 	public String getfid() {
 		return fid;

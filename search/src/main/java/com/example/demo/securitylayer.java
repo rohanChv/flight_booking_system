@@ -17,7 +17,7 @@ public class securitylayer extends WebSecurityConfigurerAdapter{
 	    protected void configure(HttpSecurity http) throws Exception {
 
 	        http.httpBasic().and().authorizeRequests()
-	                .antMatchers(HttpMethod.POST, "/search/flight/add/**").hasRole("ADMIN")
+	                .antMatchers(HttpMethod.POST, "/search/**").hasRole("ADMIN")
 	                .antMatchers(HttpMethod.GET, "/").hasRole("USER")
 	                .and()
 	                .csrf().disable()

@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class controller {
 	@Autowired
 	repo rp;
-	@GetMapping("/flight/{route}/{date}")
+	@GetMapping("/{route}/{date}")
 	public List<flight_info> getdata(@PathVariable String route,@PathVariable String date){		
 		return rp.findflight(route,date);
 	}
-	@PostMapping("/flight/add")
+	@PostMapping("/add")
 	public String getdata(@RequestBody flight_info f1){		
 		try {
 			rp.insert(f1);
@@ -26,5 +26,10 @@ public class controller {
 		}catch(Exception e) {
 			return "sorry unable to insert";
 		}
+	}
+	@GetMapping("/hello/{fid}")
+	public String getfrd(@PathVariable String fid) {
+		flight_info f1=rp.getrd(fid);
+		return f1.getRoute()+","+f1.getDate();
 	}
 }

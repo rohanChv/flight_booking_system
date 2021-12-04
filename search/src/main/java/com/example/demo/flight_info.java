@@ -1,10 +1,13 @@
 package com.example.demo;
 
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="flight_info")
 public class flight_info {
-String name,route,date,fid;
+	@Indexed(unique=true)
+	String fid;
+String name,route,date;
 
 public String getFid() {
 	return fid;
