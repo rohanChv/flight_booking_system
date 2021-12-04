@@ -4,6 +4,7 @@ package com.example.demo;
 
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +23,7 @@ serv s1=new serv();
 public Optional<fare> getfare(@PathVariable String id) {
 	return rp.getinfo(id);
 }
-@PostMapping("/getfare/add")
+@PostMapping("/flight/add")
 public String add(@RequestBody fare f1) {
 	try {
 		rp.insert(f1);
@@ -31,13 +32,13 @@ public String add(@RequestBody fare f1) {
 		return "sorry problem in creation ";
 	}
 }
-@GetMapping("/{id}/{type}/select")
+@GetMapping("/{id}/{type}")
 public String getfare(@PathVariable String id,@PathVariable String type) {
 	fare f1=rp.getobj(id);
 	return "your seat is selected.please confirm.\nformat:class,fare\n"+s1.getdata(f1, type)+","+s1.fr();
 }
 
-@GetMapping("/{id}/{type}/select/confirm")
+@GetMapping("/{id}/{type}/confirm")
 public String getcon() {
 	return "flight id:"+s1.fid();
 }

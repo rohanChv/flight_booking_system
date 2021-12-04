@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import org.springframework.context.annotation.Configuration;
+
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,7 +19,7 @@ public class securitylayer extends WebSecurityConfigurerAdapter{
 	    protected void configure(HttpSecurity http) throws Exception {
 
 	        http.httpBasic().and().authorizeRequests()
-	                .antMatchers(HttpMethod.POST, "/fare/getfare/add**").hasRole("ADMIN")
+	                .antMatchers(HttpMethod.POST, "/fare/flight/**").hasRole("ADMIN")
 	                .antMatchers(HttpMethod.GET, "/").hasRole("USER")
 	                .and()
 	                .csrf().disable()

@@ -1,6 +1,7 @@
-package com.example.demo;
+package com.example.demo1;
 
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,12 +27,21 @@ fserv fs1;
 			this.fclass=fs1.getclass();
 			status="booked";
 			this.name=name;
-			book b1=new book(fid,fare,fclass,status,name);
-				rp.save(b1);
-				return "booked."+"name:"+name+"\nclass:"+b1.getFclass()+"\npayment:"+b1.getPayment_status();
+			book b1=new book(fid,fare,fclass,status,name,"np");
+			book b2=rp.get(fid, name);
+			if(b2==null) {
+				rp.insert(b1);
+				return "ticket is booked."+"\nname:"+name+"\nclass:"+b1.getFclass()+"\npayment:"+b1.getPayment_status();
+			}
+			else
+				if(b2.getfid().contentEquals(fid)&&b2.getName().contentEquals(name)) {
+					return "dear user a ticket is booked already with same name in same flight.check credentials to avoid financial loss";
+				}
+				else
+					return "normal exit";
 			
 		}catch(Exception e) {
-			return "cannot book";
+			return e.getMessage();
 		}	
 	}
 	
