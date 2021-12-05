@@ -16,6 +16,9 @@ public class book {
 		this.name = name;
 		this.payment_status=payment_status;
 	}
+	public book() {
+		// TODO Auto-generated constructor stub
+	}
 	public String getfid() {
 		return fid;
 	}
