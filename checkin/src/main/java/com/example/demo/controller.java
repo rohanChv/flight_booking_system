@@ -19,6 +19,7 @@ public class controller {
 		if(b1.getPayment_status().contains("np")) {
 			return "pay the fare";
 		}
+		else
 		return c2.getfrd(fid);
 	}
 }

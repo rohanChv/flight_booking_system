@@ -14,31 +14,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/booking")
 public class controller {
-	String fid,fare,fclass,status,name;
+	
 @Autowired
 repo rp;
 @Autowired
-fserv fs1;
+service_layer s;
 	@GetMapping("/book/{name}")
 	public String add(@PathVariable String name) {
+		
 		try {
-			this.fid=fs1.getid();
-			this.fare=fs1.fare();
-			this.fclass=fs1.getclass();
-			status="booked";
-			this.name=name;
-			book b1=new book(fid,fare,fclass,status,name,"np");
+			book ba=s.add(name);
+			String fid=ba.getfid();
 			book b2=rp.get(fid, name);
 			if(b2==null) {
-				rp.insert(b1);
-				return "ticket is booked."+"\nname:"+name+"\nclass:"+b1.getFclass()+"\npayment:"+b1.getPayment_status();
+				rp.insert(ba);
+				return "ticket is booked."+"\nname:"+name+"\nclass:"+ba.getFclass()+"\npayment:"+ba.getPayment_status();
 			}
 			else
 				if(b2.getfid().contentEquals(fid)&&b2.getName().contentEquals(name)) {
 					return "dear user a ticket is booked already with same name in same flight.check credentials to avoid financial loss";
 				}
 				else
-					return "normal exit";
+					return "unusual exit";
+
 			
 		}catch(Exception e) {
 			return e.getMessage();
