@@ -46,11 +46,8 @@ service_layer s;
 @GetMapping("/cancel/{fid}/{name}")
 	public String cancel(@PathVariable String fid,@PathVariable String name){
 		try
-	  	{ 
-		book b1=rp.get(fid, name);
+	  	{  
 	  	rp.delete(fid, name);
-	  	b1.setStatus("cancelled"); 
-	  	rp.insert(b1);
 	  	return "booking canceled"; 
 	  }catch(Exception e) { 
 		  return e.getMessage();
