@@ -77,12 +77,5 @@ public class fare {
 		this.fist_class = fist_class;
 		this.date = date;
 		this.route = route;
-	}
-
-	public fare() {
-		// TODO Auto-generated constructor stub
-	}
-
-	
-	
+	}		
 }

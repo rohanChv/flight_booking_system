@@ -40,7 +40,7 @@ public class serv {
 						return fin;
 					}
 					else
-						return "sorry no mapping";		
+						return "na";		
 	}
 	public String fid() {
 		return id;

@@ -2,6 +2,7 @@ package com.example.demo;
 
 
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -20,7 +21,7 @@ public class controller {
 repo rp;
 serv s1=new serv();
 @GetMapping("/{id}")
-public Optional<fare> getfare(@PathVariable String id) {
+public List<fare> getfare(@PathVariable String id) {
 	return rp.getinfo(id);
 }
 @PostMapping("/flight/add")
@@ -35,6 +36,10 @@ public String add(@RequestBody fare f1) {
 @GetMapping("/{id}/{type}")
 public String getfare(@PathVariable String id,@PathVariable String type) {
 	fare f1=rp.getobj(id);
+	if(s1.getdata(f1, type).contentEquals("na")) {
+		return "sorry given class is not available in this flight";
+	}
+	else
 	return "your seat is selected.please confirm.\nformat:class,fare\n"+s1.getdata(f1, type)+","+s1.fr();
 }
 
